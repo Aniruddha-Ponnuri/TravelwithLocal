@@ -5,8 +5,8 @@ const TONE_CLASSES: Record<Tone, string> = {
   light: "bg-surface-2 text-ink-600",
   blue: "bg-brand-blue text-mist-100",
   teal: "bg-brand-teal text-mist-100",
-  orange: "bg-brand-orange text-ink-900",
-  violet: "bg-brand-moss text-mist-100",
+  orange: "bg-brand-orange text-mist-100",
+  violet: "bg-violet-500 text-mist-100",
   navy: "bg-navy-500 text-mist-200",
   white: "bg-mist-100 text-ink-800",
 };

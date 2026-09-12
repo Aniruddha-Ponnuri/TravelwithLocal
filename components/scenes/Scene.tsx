@@ -1,14 +1,14 @@
 import type { ScenePalette } from "@/lib/data";
 
 const GRADIENTS: Record<ScenePalette, string> = {
-  ocean: "from-[#5fa8a0] via-[#1f6b5c] to-[#123d34]",
-  forest: "from-[#8fae5a] via-[#47502f] to-[#2a301c]",
-  sunset: "from-[#e2a233] via-[#c96a2e] to-[#7a3018]",
-  mountain: "from-[#a9ab8f] via-[#5c624f] to-[#293024]",
-  desert: "from-[#e9d29a] via-[#c98a3a] to-[#7a4a1c]",
-  dusk: "from-[#9c86a8] via-[#5b3f66] to-[#251c36]",
-  coast: "from-[#a3c2b5] via-[#3f7a68] to-[#1a3d33]",
-  city: "from-[#a39b84] via-[#5c5443] to-[#292418]",
+  ocean: "from-[#38bdf8] via-[#0ea5e9] to-[#0c4a9e]",
+  forest: "from-[#4ade80] via-[#16a34a] to-[#14532d]",
+  sunset: "from-[#fbbf24] via-[#fb7185] to-[#9d174d]",
+  mountain: "from-[#94a3b8] via-[#475569] to-[#0f172a]",
+  desert: "from-[#fde68a] via-[#f59e0b] to-[#9a3412]",
+  dusk: "from-[#818cf8] via-[#4338ca] to-[#1e1b4b]",
+  coast: "from-[#67e8f9] via-[#0891b2] to-[#0c4a6e]",
+  city: "from-[#64748b] via-[#334155] to-[#0f172a]",
 };
 
 const DUSK_STARS = Array.from({ length: 18 }, (_, i) => ({

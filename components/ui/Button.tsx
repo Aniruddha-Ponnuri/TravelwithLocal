@@ -7,7 +7,7 @@ type Size = "sm" | "md" | "lg";
 const VARIANT_CLASSES: Record<Variant, string> = {
   primary: "bg-brand-blue text-mist-100 hover:bg-brand-blue-dark",
   teal: "bg-brand-teal text-mist-100 hover:bg-brand-teal-dark",
-  orange: "bg-brand-orange text-ink-900 hover:bg-brand-orange-dark",
+  orange: "bg-brand-orange text-mist-100 hover:bg-brand-orange-dark",
   white: "bg-mist-100 text-ink-800 hover:bg-surface-2",
   "ghost-dark": "bg-navy-600 text-mist-100 border border-navy-border hover:bg-navy-500",
 };

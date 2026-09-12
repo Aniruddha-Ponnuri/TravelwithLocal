@@ -5,43 +5,43 @@
 @import "@fontsource/space-mono/700.css";
 
 :root {
-  --background: #f1e9d4;
-  --foreground: #1e2c22;
+  --background: #f8fafc;
+  --foreground: #111827;
 
-  /* Brand — laterite earth, marigold, monsoon teal */
-  --color-brand-blue: #b0492a; /* clay: primary action + link accent */
-  --color-brand-blue-dark: #8a3a21;
-  --color-brand-teal: #1f6b5c; /* monsoon teal: secondary action */
-  --color-brand-teal-dark: #164f44;
-  --color-brand-orange: #d9971f; /* marigold: badges, tertiary action */
-  --color-brand-orange-dark: #b87a12;
-  --color-brand-moss: #47502f; /* moss: fourth accent (remote-work tier) */
+  /* Brand — pulled from the FL_D1 Figma file's fills (Hero Card, Search
+     Card, Community Itineraries chips), not the redesign's earlier palette. */
+  --color-brand-blue: #0f62fe;
+  --color-brand-blue-dark: #103a78;
+  --color-brand-teal: #14b8a6;
+  --color-brand-teal-dark: #0f9c8c;
+  --color-brand-orange: #ff7a45;
+  --color-brand-orange-dark: #f0632c;
 
   /* Ink (headline + body text, dark surfaces) */
-  --color-ink-900: #142019;
-  --color-ink-800: #1b2b21;
-  --color-ink-700: #223027;
-  --color-ink-600: #55624f;
-  --color-ink-500: #79815f;
+  --color-ink-900: #071427;
+  --color-ink-800: #0f172a;
+  --color-ink-700: #111827;
+  --color-ink-600: #315480;
+  --color-ink-500: #5b6b82;
 
   /* Dark-surface tints, used inside ink panels */
-  --color-navy-600: #2d4534;
-  --color-navy-500: #24392c;
-  --color-navy-border: rgba(163, 183, 148, 0.35);
+  --color-navy-600: #173a64;
+  --color-navy-500: #102a49;
+  --color-navy-border: rgba(49, 84, 128, 0.45);
 
-  /* Light surfaces + lines — warm paper */
-  --color-surface: #f1e9d4;
-  --color-surface-2: #e8dfc3;
-  --color-surface-3: #e3e9df;
-  --color-surface-4: #f4e6c4;
-  --color-line: #dcce9f;
-  --color-line-soft: #e3d7ae;
-  --color-line-blue: #bcd6c8;
+  /* Light surfaces + lines */
+  --color-surface: #f8fafc;
+  --color-surface-2: #eff6ff;
+  --color-surface-3: #eef6ff;
+  --color-surface-4: #e0f2fe;
+  --color-line: #e2e8f0;
+  --color-line-soft: #d7e2f0;
+  --color-line-blue: #bfdbfe;
 
   /* Text on dark ink surfaces */
-  --color-mist-100: #f7f1e0;
-  --color-mist-200: #d9cda8;
-  --color-mist-300: #b9af8c;
+  --color-mist-100: #ffffff;
+  --color-mist-200: #d7e2f0;
+  --color-mist-300: #cbd5e1;
 
   --font-display: "Domine Variable", "Domine", Georgia, serif;
   --font-mono-ticket: "Space Mono", ui-monospace, monospace;
@@ -60,7 +60,6 @@
   --color-brand-teal-dark: var(--color-brand-teal-dark);
   --color-brand-orange: var(--color-brand-orange);
   --color-brand-orange-dark: var(--color-brand-orange-dark);
-  --color-brand-moss: var(--color-brand-moss);
 
   --color-ink-900: var(--color-ink-900);
   --color-ink-800: var(--color-ink-800);
