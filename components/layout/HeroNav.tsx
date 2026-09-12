@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/Button";
+import { Suspense } from "react";
+import { NavAuth } from "@/components/layout/NavAuth";
 import { primaryNavLinks } from "@/lib/data";
 
 const NAV_LINKS = [...primaryNavLinks, { label: "Community", href: "/#community" }];
@@ -21,12 +22,9 @@ export function HeroNav() {
         ))}
       </ul>
       <div className="flex shrink-0 items-center gap-3">
-        <Button href="/account" variant="ghost-dark" size="sm">
-          Sign in
-        </Button>
-        <Button href="/account" variant="white" size="sm">
-          Profile
-        </Button>
+        <Suspense fallback={<div className="h-9 w-[132px] animate-pulse rounded-full bg-navy-600" />}>
+          <NavAuth variant="dark" />
+        </Suspense>
       </div>
     </nav>
   );

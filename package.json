@@ -12,6 +12,8 @@
     "@fontsource-variable/domine": "^5.3.0",
     "@fontsource-variable/public-sans": "^5.3.0",
     "@fontsource/space-mono": "^5.3.0",
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.116.0",
     "csstype": "^3.2.3",
     "next": "16.3.4",
     "react": "19.2.8",

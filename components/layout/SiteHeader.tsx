@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/Button";
+import { Suspense } from "react";
+import { NavAuth } from "@/components/layout/NavAuth";
 import { primaryNavLinks } from "@/lib/data";
 
 const NAV_LINKS = [...primaryNavLinks, { label: "Stays", href: "/stays" }];
@@ -25,9 +26,9 @@ export function SiteHeader() {
           >
             Book a stay
           </Link>
-          <Button href="/account" variant="primary" size="sm">
-            Profile
-          </Button>
+          <Suspense fallback={<div className="h-9 w-[92px] animate-pulse rounded-full bg-surface-2" />}>
+            <NavAuth variant="light" />
+          </Suspense>
         </div>
       </div>
     </header>
