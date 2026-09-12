@@ -4,20 +4,26 @@ import { redirect } from "next/navigation";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { ProfileForm } from "@/components/auth/ProfileForm";
 import { SignOutButton } from "@/components/auth/SignOutButton";
-import { createClient } from "@/lib/supabase/server";
+import { AccountTabs } from "@/components/auth/AccountTabs";
+import { FavoritesList } from "@/components/auth/FavoritesList";
+import { createClient, getCurrentUser } from "@/lib/supabase/server";
 
 export const metadata: Metadata = { title: "Your profile" };
 
-export default async function AccountPage() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+export default async function AccountPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const sp = await searchParams;
+  const tab = sp.tab === "favorites" ? "favorites" : "profile";
 
+  const user = await getCurrentUser();
   if (!user) {
     redirect("/login?next=/account");
   }
 
+  const supabase = await createClient();
   const { data: profile } = await supabase
     .from("profiles")
     .select("full_name, avatar_url")
@@ -51,21 +57,29 @@ export default async function AccountPage() {
           </div>
         </div>
 
-        <section className="flex flex-col gap-5 rounded-2xl border border-line p-6">
-          <div>
-            <h2 className="text-lg font-medium text-ink-700">Profile</h2>
-            <p className="text-sm text-ink-500">This is how local hosts and other travelers will see you.</p>
-          </div>
-          <ProfileForm fullName={fullName} />
-        </section>
+        <AccountTabs active={tab} />
 
-        <section className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-line p-6">
-          <div>
-            <h2 className="text-lg font-medium text-ink-700">Account</h2>
-            <p className="text-sm text-ink-500">{user.email}</p>
-          </div>
-          <SignOutButton />
-        </section>
+        {tab === "favorites" ? (
+          <FavoritesList />
+        ) : (
+          <>
+            <section className="flex flex-col gap-5 rounded-2xl border border-line p-6">
+              <div>
+                <h2 className="text-lg font-medium text-ink-700">Profile</h2>
+                <p className="text-sm text-ink-500">This is how local hosts and other travelers will see you.</p>
+              </div>
+              <ProfileForm fullName={fullName} />
+            </section>
+
+            <section className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-line p-6">
+              <div>
+                <h2 className="text-lg font-medium text-ink-700">Account</h2>
+                <p className="text-sm text-ink-500">{user.email}</p>
+              </div>
+              <SignOutButton />
+            </section>
+          </>
+        )}
       </div>
     </>
   );

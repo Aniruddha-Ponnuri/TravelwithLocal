@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+import { createClient, getCurrentUser } from "@/lib/supabase/server";
 
 export interface NavUser {
   email: string;
@@ -8,12 +8,10 @@ export interface NavUser {
 
 /** The signed-in user's nav-display info, or null when signed out. Used by the site headers. */
 export async function getNavUser(): Promise<NavUser | null> {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getCurrentUser();
   if (!user) return null;
 
+  const supabase = await createClient();
   const { data: profile } = await supabase
     .from("profiles")
     .select("full_name, avatar_url")

@@ -7,16 +7,19 @@ import { PopularDestinationsSection } from "@/components/home/PopularDestination
 import { CommunityItinerariesSection } from "@/components/home/CommunityItinerariesSection";
 import { CommunityStoriesSection } from "@/components/home/CommunityStoriesSection";
 import { MobileCtaSection } from "@/components/home/MobileCtaSection";
+import { getFavoritedKeys } from "@/lib/supabase/favorites";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const favoritedKeys = await getFavoritedKeys();
+
   return (
     <>
       <HeroSection />
       <PlannerSection />
       <SearchSection />
-      <WeekendGetawaysSection />
+      <WeekendGetawaysSection favoritedKeys={favoritedKeys} />
       <LocalExperiencesSection />
-      <PopularDestinationsSection />
+      <PopularDestinationsSection favoritedKeys={favoritedKeys} />
       <CommunityItinerariesSection />
       <CommunityStoriesSection />
       <MobileCtaSection />

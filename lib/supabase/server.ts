@@ -1,5 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
+import { cache } from "react";
 import type { Database } from "@/lib/supabase/types";
 
 /**
@@ -24,7 +25,7 @@ export async function createClient() {
             }
           } catch {
             // Called from a Server Component render, where cookies can't be
-            // set. Safe to ignore as long as middleware.ts is refreshing the
+            // set. Safe to ignore as long as proxy.ts is refreshing the
             // session on every request.
           }
         },
@@ -32,3 +33,17 @@ export async function createClient() {
     }
   );
 }
+
+/**
+ * The signed-in user, authoritative (calls Supabase's Auth server) and
+ * memoized for the lifetime of one request — call this as many times as
+ * you like across Server Components/actions in the same render without
+ * paying for repeat network round-trips. Returns null when signed out.
+ */
+export const getCurrentUser = cache(async () => {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  return user;
+});

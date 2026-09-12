@@ -1,10 +1,20 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import { verifyAccessToken } from "@/lib/supabase/verify-jwt";
 
 /**
  * Refreshes the Supabase session cookie on every request so server
  * components always see an up-to-date auth state. Also gates /account
  * behind sign-in.
+ *
+ * The sign-in check itself is optimistic and local: `getSession()` reads
+ * the access token straight from the cookie (refreshing it via the
+ * refresh token only when it's actually expired), and `verifyAccessToken`
+ * checks that token's signature and expiry against Supabase's public
+ * JWKS. Neither step calls Supabase's Auth server, so this runs on every
+ * request without adding a network round trip. It's still only an
+ * optimistic check — `app/account/page.tsx` calls the authoritative
+ * `getUser()` before it renders or edits anything.
  */
 export async function updateSession(request: NextRequest) {
   let response = NextResponse.next({ request });
@@ -30,13 +40,12 @@ export async function updateSession(request: NextRequest) {
     }
   );
 
-  // Do not run any code between createServerClient and getUser(): it
-  // refreshes the token and must run on every request.
   const {
-    data: { user },
-  } = await supabase.auth.getUser();
+    data: { session },
+  } = await supabase.auth.getSession();
+  const verified = await verifyAccessToken(session?.access_token);
 
-  if (!user && request.nextUrl.pathname.startsWith("/account")) {
+  if (!verified && request.nextUrl.pathname.startsWith("/account")) {
     const redirectUrl = new URL("/login", request.url);
     redirectUrl.searchParams.set("next", request.nextUrl.pathname);
     return NextResponse.redirect(redirectUrl);

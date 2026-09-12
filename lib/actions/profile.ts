@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { createClient } from "@/lib/supabase/server";
+import { createClient, getCurrentUser } from "@/lib/supabase/server";
 
 export interface ProfileFormState {
   error: string | null;
@@ -17,14 +17,12 @@ export async function updateProfile(
     return { error: "Enter your name.", success: false };
   }
 
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getCurrentUser();
   if (!user) {
     return { error: "Your session expired — sign in again.", success: false };
   }
 
+  const supabase = await createClient();
   const { error } = await supabase.from("profiles").update({ full_name: fullName }).eq("id", user.id);
   if (error) {
     return { error: error.message, success: false };

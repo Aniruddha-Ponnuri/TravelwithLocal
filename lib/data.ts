@@ -9,6 +9,9 @@ export const primaryNavLinks = [
   { label: "Trips", href: "/#trips" },
 ] as const;
 
+// The two kinds of static "location" content a traveler can favorite.
+export type LocationType = "destination" | "getaway";
+
 export type ScenePalette =
   | "ocean"
   | "forest"
@@ -633,6 +636,21 @@ export const stays: Stay[] = [
     rooms: makeRooms(6200, "ocean"),
   },
 ];
+
+/** A location is bookable through the stay search when its city has real stay listings. */
+export function isBookable(locationName: string): boolean {
+  return (cities as readonly string[]).includes(locationName);
+}
+
+/** The public/images subfolder a favoritable location's photo lives in. */
+export function locationImageFolder(type: LocationType): "destinations" | "getaways" {
+  return type === "destination" ? "destinations" : "getaways";
+}
+
+/** The stable key used to look up a location in a favorited-keys set. */
+export function favoriteKey(type: LocationType, slug: string): string {
+  return `${type}:${slug}`;
+}
 
 export function getStayById(id: string): Stay | undefined {
   return stays.find((s) => s.id === id);
