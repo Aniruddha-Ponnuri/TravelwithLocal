@@ -21,18 +21,19 @@ export function AuthLayout({
           <p className="mt-6 text-sm text-ink-500">{footer}</p>
         </div>
       </div>
-      <div className="relative hidden w-1/2 lg:block">
-        <Photo
-          src="/images/hero-visual.jpg"
-          alt="Mountain valley in Meghalaya, the route a local guide walks travelers through at dawn"
-          rounded="rounded-none"
-          className="h-full w-full"
-          sizes="50vw"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink-900/80 via-ink-900/10 to-transparent" aria-hidden />
-        <div className="absolute inset-x-10 bottom-10 flex flex-col gap-1">
-          <p className="font-display text-2xl text-mist-100">15,000+ travelers</p>
+      <div className="hidden w-1/2 flex-col justify-center gap-8 bg-ink-900 px-12 py-16 lg:flex">
+        <div className="flex flex-col gap-1">
+          <p className="font-display text-3xl text-mist-100">15,000+ travelers</p>
           <p className="text-sm font-medium text-mist-300">already planning with a local, not an algorithm</p>
+        </div>
+        <div className="relative aspect-[560/640] w-full max-w-[420px] overflow-hidden rounded-3xl border border-navy-border">
+          <Photo
+            src="/images/hero-visual.jpg"
+            alt="Mountain valley in Meghalaya — a local guide's off-grid trip, rated 4.8 out of 5 by the community"
+            rounded="rounded-none"
+            className="h-full w-full"
+            sizes="420px"
+          />
         </div>
       </div>
     </div>

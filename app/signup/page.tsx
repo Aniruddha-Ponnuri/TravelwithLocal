@@ -4,6 +4,7 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { AuthLayout } from "@/components/auth/AuthLayout";
 import { SignupForm } from "@/components/auth/SignupForm";
 import { GoogleButton } from "@/components/auth/GoogleButton";
+import { GOOGLE_AUTH_ENABLED } from "@/lib/auth-config";
 
 export const metadata: Metadata = { title: "Create an account" };
 
@@ -24,12 +25,16 @@ export default function SignupPage() {
         }
       >
         <div className="flex flex-col gap-4">
-          <GoogleButton />
-          <div className="flex items-center gap-3 text-xs font-medium text-ink-500">
-            <span className="h-px flex-1 bg-line" />
-            or sign up with email
-            <span className="h-px flex-1 bg-line" />
-          </div>
+          {GOOGLE_AUTH_ENABLED ? (
+            <>
+              <GoogleButton />
+              <div className="flex items-center gap-3 text-xs font-medium text-ink-500">
+                <span className="h-px flex-1 bg-line" />
+                or sign up with email
+                <span className="h-px flex-1 bg-line" />
+              </div>
+            </>
+          ) : null}
           <SignupForm />
         </div>
       </AuthLayout>

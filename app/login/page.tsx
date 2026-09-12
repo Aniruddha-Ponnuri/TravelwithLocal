@@ -5,6 +5,7 @@ import { AuthLayout } from "@/components/auth/AuthLayout";
 import { LoginForm } from "@/components/auth/LoginForm";
 import { GoogleButton } from "@/components/auth/GoogleButton";
 import { FormError } from "@/components/auth/FormError";
+import { GOOGLE_AUTH_ENABLED } from "@/lib/auth-config";
 
 export const metadata: Metadata = { title: "Sign in" };
 
@@ -38,12 +39,16 @@ export default async function LoginPage({
             <FormError message="Check your email to confirm your account, then sign in below." />
           ) : null}
           {error ? <FormError message={error} /> : null}
-          <GoogleButton next={next} />
-          <div className="flex items-center gap-3 text-xs font-medium text-ink-500">
-            <span className="h-px flex-1 bg-line" />
-            or sign in with email
-            <span className="h-px flex-1 bg-line" />
-          </div>
+          {GOOGLE_AUTH_ENABLED ? (
+            <>
+              <GoogleButton next={next} />
+              <div className="flex items-center gap-3 text-xs font-medium text-ink-500">
+                <span className="h-px flex-1 bg-line" />
+                or sign in with email
+                <span className="h-px flex-1 bg-line" />
+              </div>
+            </>
+          ) : null}
           <LoginForm next={next} />
         </div>
       </AuthLayout>
